@@ -99,6 +99,28 @@ export function CourseDetails({ courseId }: CourseDetailsProps) {
 
   return (
     <div className="max-w-5xl mx-auto">
+      {/* Quick Action Bar */}
+      {course.isEnrolled && (
+        <div className="bg-primary/10 rounded-xl p-4 mb-6 flex justify-between items-center">
+          <div>
+            <h3 className="font-medium text-primary">Ready to continue learning?</h3>
+            <p className="text-sm text-gray-600">You've completed {course.progress}% of this course</p>
+          </div>
+          <Button 
+            size="lg"
+            onClick={() => {
+              const firstModule = course.modules?.[0];
+              const firstLesson = firstModule?.lessons?.[0];
+              if (firstLesson) {
+                navigate(`/lessons/${firstLesson.id}`);
+              }
+            }}
+          >
+            Continue Learning
+          </Button>
+        </div>
+      )}
+
       {/* Course Header */}
       <div className="relative mb-6">
         <div className="h-60 w-full rounded-xl overflow-hidden">
@@ -281,18 +303,10 @@ export function CourseDetails({ courseId }: CourseDetailsProps) {
                     </Button>
                   </div>
                 ) : (
-                  <Button 
-                    className="w-full mt-2" 
-                    onClick={() => {
-                      const firstModule = course.modules?.[0];
-                      const firstLesson = firstModule?.lessons?.[0];
-                      if (firstLesson) {
-                        navigate(`/lessons/${firstLesson.id}`);
-                      }
-                    }}
-                  >
-                    Continue Learning
-                  </Button>
+                  <div className="text-center mt-4">
+                    <Badge variant="outline" className="mb-2">{course.progress > 0 ? "In Progress" : "Just Started"}</Badge>
+                    <p className="text-xs text-gray-500 mt-2">Continue your learning journey using the button at the top</p>
+                  </div>
                 )}
               </div>
             ) : (
