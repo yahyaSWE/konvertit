@@ -194,10 +194,10 @@ function CourseCard({ course }: CourseCardProps) {
           <div className="w-7 h-7 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-medium">
             {course.author?.fullName?.charAt(0) || "I"}
           </div>
-          <span className="text-sm text-gray-600 ml-2">{course.author?.fullName || "Instructor"}</span>
+          <span className="text-sm text-gray-600 ml-2">{course.author?.fullName || "Instruktör"}</span>
         </div>
         <Link href={`/courses/${course.id}`}>
-          <Button size="sm">View Course</Button>
+          <Button size="sm">Visa kurs</Button>
         </Link>
       </CardFooter>
     </Card>
