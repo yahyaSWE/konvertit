@@ -3,7 +3,7 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/use-auth";
 import { UserRole } from "@shared/schema";
 import { useTheme } from "@/components/ui/theme-provider";
-import ThemeButton from "@/components/theme-button";
+import ThemeButtonSimple from "@/components/theme-button-simple";
 
 import {
   BarChart2,

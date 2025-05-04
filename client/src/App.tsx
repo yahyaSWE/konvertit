@@ -18,6 +18,7 @@ import CreateCourse from "@/pages/teachers/create-course";
 import EditCourse from "@/pages/teachers/edit-course";
 import AdminDashboard from "@/pages/admin/dashboard";
 import AdminUsers from "@/pages/admin/users";
+import AdminAnalytics from "@/pages/admin/analytics";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -44,6 +45,7 @@ function Router() {
       {/* Admin Routes */}
       <Route path="/admin/dashboard" component={AdminDashboard} />
       <Route path="/admin/users" component={AdminUsers} />
+      <Route path="/admin/analytics" component={AdminAnalytics} />
       
       {/* Fallback to 404 */}
       <Route component={NotFound} />
