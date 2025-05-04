@@ -86,6 +86,7 @@ type ModuleFormValues = z.infer<typeof moduleSchema>;
 const lessonSchema = insertLessonSchema.extend({
   title: z.string().min(3, "Title must be at least 3 characters"),
   content: z.string().min(10, "Content must be at least 10 characters"),
+  videoUrl: z.string().optional(),
   type: z.string().min(1, "Type is required"),
   duration: z.number().min(1, "Duration must be at least 1 minute"),
   order: z.number().min(1, "Order must be at least 1"),
@@ -148,6 +149,7 @@ export function CourseEditor({ courseId }: CourseEditorProps) {
     defaultValues: {
       title: "",
       content: "",
+      videoUrl: "",
       type: "text",
       duration: 15,
       moduleId: 0,
@@ -323,6 +325,7 @@ export function CourseEditor({ courseId }: CourseEditorProps) {
       return apiRequest("PUT", `/api/lessons/${data.id}`, {
         title: data.title,
         content: data.content,
+        videoUrl: data.videoUrl,
         type: data.type,
         duration: data.duration,
         order: data.order,
@@ -433,6 +436,7 @@ export function CourseEditor({ courseId }: CourseEditorProps) {
     lessonForm.reset({
       title: "",
       content: "",
+      videoUrl: "",
       type: "text",
       duration: 15,
       moduleId: moduleId,
@@ -447,6 +451,7 @@ export function CourseEditor({ courseId }: CourseEditorProps) {
     lessonForm.reset({
       title: lesson.title,
       content: lesson.content,
+      videoUrl: lesson.videoUrl || "",
       type: lesson.type,
       duration: lesson.duration,
       moduleId: lesson.moduleId,

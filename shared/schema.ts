@@ -56,6 +56,7 @@ export const lessons = pgTable("lessons", {
   moduleId: integer("module_id").notNull(), // references modules.id
   title: text("title").notNull(),
   content: text("content").notNull(),
+  videoUrl: text("video_url"), // URL to YouTube or similar video platform
   type: text("type").notNull(), // video, text, quiz, etc.
   duration: integer("duration"), // in minutes
   order: integer("order").notNull(),
