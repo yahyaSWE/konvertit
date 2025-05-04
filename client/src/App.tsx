@@ -31,15 +31,15 @@ function Router() {
       <Route path="/" component={Dashboard} />
       <Route path="/dashboard" component={Dashboard} />
       <Route path="/courses" component={Courses} />
-      <Route path="/courses/:id" component={CourseDetails} />
-      <Route path="/lessons/:id" component={Lesson} />
       <Route path="/achievements" component={Achievements} />
       <Route path="/profile" component={Profile} />
       <Route path="/settings" component={Settings} />
+      <Route path="/lessons/:id" component={Lesson} />
       
-      {/* Teacher Routes */}
+      {/* Teacher Routes - specific routes before parameterized routes */}
       <Route path="/courses/create" component={CreateCourse} />
       <Route path="/courses/:id/edit" component={EditCourse} />
+      <Route path="/courses/:id" component={CourseDetails} />
       
       {/* Admin Routes */}
       <Route path="/admin/dashboard" component={AdminDashboard} />
