@@ -88,10 +88,10 @@ export function QuickStartView() {
         <CardContent className="p-6">
           <div className="flex flex-col items-center py-10 text-center">
             <BookOpen className="h-12 w-12 text-gray-400 mb-4" />
-            <h3 className="text-lg font-semibold mb-2">Ready to start learning?</h3>
-            <p className="text-gray-600 mb-6">You're not enrolled in any courses yet.</p>
+            <h3 className="text-lg font-semibold mb-2">Redo att börja lära dig?</h3>
+            <p className="text-gray-600 mb-6">Du är inte registrerad på några kurser ännu.</p>
             <Button onClick={handleViewAllCourses}>
-              Browse Courses
+              Bläddra bland kurser
             </Button>
           </div>
         </CardContent>
@@ -118,7 +118,7 @@ export function QuickStartView() {
             <div className="flex items-center mb-2">
               <span className="bg-primary/90 text-white text-xs font-medium px-2.5 py-1 rounded">{course.category}</span>
               <span className="mx-2">•</span>
-              <span className="text-sm flex items-center"><Clock className="h-3.5 w-3.5 mr-1" /> {course.duration} hours</span>
+              <span className="text-sm flex items-center"><Clock className="h-3.5 w-3.5 mr-1" /> {course.duration} timmar</span>
             </div>
             <h2 className="text-2xl font-bold mb-1">{course.title}</h2>
           </div>
@@ -127,7 +127,7 @@ export function QuickStartView() {
         <div className="p-6">
           <div className="mb-6">
             <div className="flex justify-between items-center mb-2">
-              <span className="text-sm font-medium text-gray-700">Your progress</span>
+              <span className="text-sm font-medium text-gray-700">Din framsteg</span>
               <span className="text-sm font-medium text-primary">{latestEnrollment.progress}%</span>
             </div>
             <Progress value={latestEnrollment.progress} className="h-2" />
@@ -135,10 +135,10 @@ export function QuickStartView() {
           
           <div className="flex flex-col sm:flex-row sm:justify-between sm:items-center gap-4">
             <div className="space-y-1">
-              <p className="text-sm text-gray-600">Last activity: {formatDate(latestEnrollment.enrolledAt)}</p>
+              <p className="text-sm text-gray-600">Senaste aktivitet: {formatDate(latestEnrollment.enrolledAt)}</p>
               <p className="text-sm flex items-center">
                 <Award className="h-4 w-4 mr-1 text-yellow-500" /> 
-                {course.points} points upon completion
+                {course.points} poäng vid slutförande
               </p>
             </div>
             
@@ -147,7 +147,7 @@ export function QuickStartView() {
               onClick={handleContinueLearning}
               className="w-full sm:w-auto"
             >
-              Continue Learning
+              Fortsätt lära dig
               <ChevronRight className="h-4 w-4 ml-1" />
             </Button>
           </div>

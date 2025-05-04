@@ -261,19 +261,19 @@ export function CourseDetails({ courseId }: CourseDetailsProps) {
           </div>
         </div>
 
-        {/* Course Actions */}
+        {/* Kursåtgärder */}
         <div className="space-y-6">
           <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
             <div className="flex items-center mb-4">
               <Award className="h-5 w-5 text-primary mr-2" />
-              <h3 className="font-medium">Course Progress</h3>
+              <h3 className="font-medium">Kursutveckling</h3>
             </div>
             
             {course.isEnrolled ? (
               <div className="space-y-4">
                 <div>
                   <div className="flex justify-between mb-1">
-                    <span className="text-sm text-gray-600">Completion</span>
+                    <span className="text-sm text-gray-600">Slutfört</span>
                     <span className="text-sm font-medium">{course.progress}%</span>
                   </div>
                   <div className="progress-bar">
@@ -286,26 +286,26 @@ export function CourseDetails({ courseId }: CourseDetailsProps) {
                 
                 <div>
                   <div className="flex justify-between mb-1">
-                    <span className="text-sm text-gray-600">Points to earn</span>
+                    <span className="text-sm text-gray-600">Poäng att tjäna</span>
                     <span className="text-sm font-medium">{course.points}</span>
                   </div>
                 </div>
                 
                 {course.completed ? (
                   <div className="text-center mt-4">
-                    <Badge variant="success" className="mb-2">Completed</Badge>
+                    <Badge variant="success" className="mb-2">Slutförd</Badge>
                     <Button 
                       className="w-full mt-2" 
                       variant="outline"
                       onClick={() => navigate(`/certificates/${course.id}`)}
                     >
-                      View Certificate
+                      Visa Certifikat
                     </Button>
                   </div>
                 ) : (
                   <div className="text-center mt-4">
-                    <Badge variant="outline" className="mb-2">{course.progress > 0 ? "In Progress" : "Just Started"}</Badge>
-                    <p className="text-xs text-gray-500 mt-2">Continue your learning journey using the button at the top</p>
+                    <Badge variant="outline" className="mb-2">{course.progress > 0 ? "Pågående" : "Precis börjat"}</Badge>
+                    <p className="text-xs text-gray-500 mt-2">Fortsätt din inlärningsresa med knappen högst upp</p>
                   </div>
                 )}
               </div>
@@ -314,7 +314,7 @@ export function CourseDetails({ courseId }: CourseDetailsProps) {
                 <div className="flex items-center justify-between">
                   <div>
                     <span className="text-xl font-semibold">{course.points}</span>
-                    <span className="text-gray-500 ml-1">points</span>
+                    <span className="text-gray-500 ml-1">poäng</span>
                   </div>
                   <Badge variant="outline">{course.level}</Badge>
                 </div>
@@ -327,15 +327,15 @@ export function CourseDetails({ courseId }: CourseDetailsProps) {
                   {enrollMutation.isPending ? (
                     <>
                       <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                      Enrolling...
+                      Registrerar...
                     </>
                   ) : (
-                    "Enroll Now"
+                    "Registrera dig nu"
                   )}
                 </Button>
                 
                 <p className="text-sm text-gray-500 text-center">
-                  Enroll to track progress and earn points
+                  Registrera dig för att spåra framsteg och tjäna poäng
                 </p>
               </div>
             )}
@@ -344,19 +344,19 @@ export function CourseDetails({ courseId }: CourseDetailsProps) {
           <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
             <div className="flex items-center mb-4">
               <BarChart className="h-5 w-5 text-primary mr-2" />
-              <h3 className="font-medium">Course Stats</h3>
+              <h3 className="font-medium">Kursstatistik</h3>
             </div>
             <div className="space-y-2">
               <div className="flex justify-between">
-                <span className="text-sm text-gray-600">Enrolled Students</span>
+                <span className="text-sm text-gray-600">Registrerade studenter</span>
                 <span className="text-sm font-medium">128</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-sm text-gray-600">Completion Rate</span>
+                <span className="text-sm text-gray-600">Slutförandegrad</span>
                 <span className="text-sm font-medium">72%</span>
               </div>
               <div className="flex justify-between">
-                <span className="text-sm text-gray-600">Average Rating</span>
+                <span className="text-sm text-gray-600">Genomsnittligt betyg</span>
                 <span className="text-sm font-medium">4.7/5</span>
               </div>
             </div>
