@@ -1,4 +1,10 @@
-import React, { createContext, useContext, useState, useEffect } from 'react';
+/*
+ * DEPRECATED: Please use @/components/ui/theme-provider instead
+ * This file is kept for backward compatibility but should not be used in new code
+ */
+
+import React, { createContext, useContext } from 'react';
+import { useTheme as useShadcnTheme } from '@/components/ui/theme-provider';
 
 type Theme = 'light' | 'dark';
 
@@ -10,26 +16,12 @@ interface ThemeContextProps {
 const ThemeContext = createContext<ThemeContextProps | undefined>(undefined);
 
 export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ children }) => {
-  const [theme, setTheme] = useState<Theme>(() => {
-    // Check for stored theme preference or default to 'light'
-    const savedTheme = localStorage.getItem('theme') as Theme | null;
-    return savedTheme || 'light';
-  });
-
-  useEffect(() => {
-    // Update localStorage when theme changes
-    localStorage.setItem('theme', theme);
-    
-    // Apply theme to document
-    if (theme === 'dark') {
-      document.documentElement.classList.add('dark');
-    } else {
-      document.documentElement.classList.remove('dark');
-    }
-  }, [theme]);
-
+  // Use the shadcn theme provider under the hood
+  const { theme, setTheme } = useShadcnTheme();
+  
   const toggleTheme = () => {
-    setTheme(prevTheme => prevTheme === 'light' ? 'dark' : 'light');
+    console.log("Legacy theme toggle called, current theme:", theme);
+    setTheme(theme === 'light' ? 'dark' : 'light');
   };
 
   return (
@@ -40,9 +32,14 @@ export const ThemeProvider: React.FC<{ children: React.ReactNode }> = ({ childre
 };
 
 export const useTheme = (): ThemeContextProps => {
-  const context = useContext(ThemeContext);
-  if (!context) {
-    throw new Error('useTheme must be used within a ThemeProvider');
-  }
-  return context;
+  // Use the shadcn theme hook under the hood
+  const { theme, setTheme } = useShadcnTheme();
+  
+  return {
+    theme,
+    toggleTheme: () => {
+      console.log("Legacy useTheme.toggleTheme called, current theme:", theme);
+      setTheme(theme === 'light' ? 'dark' : 'light');
+    }
+  };
 };
