@@ -96,7 +96,7 @@ export function UserManagement() {
       user.email.toLowerCase().includes(searchTerm.toLowerCase()) ||
       user.fullName.toLowerCase().includes(searchTerm.toLowerCase());
     
-    const matchesRole = roleFilter ? user.role === roleFilter : true;
+    const matchesRole = roleFilter && roleFilter !== "all" ? user.role === roleFilter : true;
     
     return matchesSearch && matchesRole;
   });
@@ -165,7 +165,7 @@ export function UserManagement() {
                   <SelectValue placeholder="All Roles" />
                 </SelectTrigger>
                 <SelectContent>
-                  <SelectItem value="">All Roles</SelectItem>
+                  <SelectItem value="all">All Roles</SelectItem>
                   <SelectItem value={UserRole.STUDENT}>Students</SelectItem>
                   <SelectItem value={UserRole.TEACHER}>Teachers</SelectItem>
                   <SelectItem value={UserRole.ADMIN}>Administrators</SelectItem>

@@ -66,8 +66,8 @@ export function CourseList() {
   const filteredCourses = courses.filter((course: Course) => {
     const matchesSearch = course.title.toLowerCase().includes(searchTerm.toLowerCase()) || 
                          course.description.toLowerCase().includes(searchTerm.toLowerCase());
-    const matchesCategory = categoryFilter ? course.category === categoryFilter : true;
-    const matchesLevel = levelFilter ? course.level === levelFilter : true;
+    const matchesCategory = categoryFilter && categoryFilter !== "all" ? course.category === categoryFilter : true;
+    const matchesLevel = levelFilter && levelFilter !== "all" ? course.level === levelFilter : true;
     
     return matchesSearch && matchesCategory && matchesLevel;
   });
@@ -95,7 +95,7 @@ export function CourseList() {
               <SelectValue placeholder="Category" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Categories</SelectItem>
+              <SelectItem value="all">All Categories</SelectItem>
               {categories.map((category) => (
                 <SelectItem key={category} value={category}>{category}</SelectItem>
               ))}
@@ -107,7 +107,7 @@ export function CourseList() {
               <SelectValue placeholder="Level" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="">All Levels</SelectItem>
+              <SelectItem value="all">All Levels</SelectItem>
               {levels.map((level) => (
                 <SelectItem key={level} value={level}>{level}</SelectItem>
               ))}
@@ -128,8 +128,8 @@ export function CourseList() {
               className="mt-4" 
               onClick={() => {
                 setSearchTerm("");
-                setCategoryFilter("");
-                setLevelFilter("");
+                setCategoryFilter("all");
+                setLevelFilter("all");
               }}
             >
               Clear Filters
