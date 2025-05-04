@@ -54,7 +54,7 @@ export function AppLayout({ children }: AppLayoutProps) {
                 />
               </svg>
             </div>
-            <h1 className="text-lg font-poppins font-bold text-textColor">LearnSmart</h1>
+            <h1 className="text-lg font-poppins font-bold text-textColor">Konvertit Guiden</h1>
           </div>
           <button
             type="button"
@@ -85,7 +85,7 @@ export function AppLayout({ children }: AppLayoutProps) {
           <div className="fixed inset-0 bg-black/50" onClick={() => setMobileMenuOpen(false)} />
           <div className="fixed top-0 left-0 w-3/4 h-full bg-white p-4 overflow-y-auto">
             <div className="flex items-center justify-between mb-6">
-              <h1 className="text-xl font-poppins font-bold">LearnSmart</h1>
+              <h1 className="text-xl font-poppins font-bold">Konvertit Guiden</h1>
               <button
                 type="button"
                 className="p-1"

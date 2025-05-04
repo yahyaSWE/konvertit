@@ -99,7 +99,7 @@ export function Sidebar() {
           <div className="bg-primary rounded-md p-2">
             <Lightbulb className="h-6 w-6 text-white" />
           </div>
-          <h1 className="text-xl font-poppins font-bold text-sidebar-foreground">LearnSmart</h1>
+          <h1 className="text-xl font-poppins font-bold text-sidebar-foreground">Konvertit Guiden</h1>
         </div>
       </div>
 
