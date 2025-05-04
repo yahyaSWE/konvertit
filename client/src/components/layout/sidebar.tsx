@@ -8,7 +8,6 @@ import ThemeButton from "@/components/theme-button";
 import {
   BarChart2,
   BookOpen,
-  Calendar,
   Home,
   LogOut,
   Settings,
@@ -46,12 +45,6 @@ export function Sidebar() {
       href: "/achievements",
       icon: <Star className="w-5 h-5 mr-3" />,
       isActive: location === "/achievements",
-    },
-    {
-      title: "Calendar",
-      href: "/calendar",
-      icon: <Calendar className="w-5 h-5 mr-3" />,
-      isActive: location === "/calendar",
     },
   ];
 
