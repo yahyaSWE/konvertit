@@ -9,14 +9,14 @@ export default function Login() {
   const { user, isLoading } = useAuth();
 
   useEffect(() => {
-    // Redirect to dashboard if already authenticated
+    // Omdirigera till dashboard om redan autentiserad
     if (user && !isLoading) {
       navigate("/dashboard");
     }
   }, [user, isLoading, navigate]);
 
   if (isLoading) {
-    return null; // Or a loading indicator
+    return null; // Eller en laddningsindikator
   }
 
   return (
@@ -25,8 +25,8 @@ export default function Login() {
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary mb-4">
           <Lightbulb className="h-8 w-8 text-white" />
         </div>
-        <h1 className="text-3xl font-bold font-poppins">LearnSmart</h1>
-        <p className="text-gray-500 mt-2">Your learning journey starts here</p>
+        <h1 className="text-3xl font-bold font-poppins">LäraSmart</h1>
+        <p className="text-gray-500 mt-2">Din inlärningsresa börjar här</p>
       </div>
       
       <LoginForm />

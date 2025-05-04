@@ -99,12 +99,12 @@ export function CourseDetails({ courseId }: CourseDetailsProps) {
 
   return (
     <div className="max-w-5xl mx-auto">
-      {/* Quick Action Bar */}
+      {/* Snabbåtgärdsfält */}
       {course.isEnrolled && (
         <div className="bg-primary/10 rounded-xl p-4 mb-6 flex justify-between items-center">
           <div>
-            <h3 className="font-medium text-primary">Ready to continue learning?</h3>
-            <p className="text-sm text-gray-600">You've completed {course.progress}% of this course</p>
+            <h3 className="font-medium text-primary">Redo att fortsätta lära dig?</h3>
+            <p className="text-sm text-gray-600">Du har slutfört {course.progress}% av denna kurs</p>
           </div>
           <Button 
             size="lg"
@@ -116,12 +116,12 @@ export function CourseDetails({ courseId }: CourseDetailsProps) {
               }
             }}
           >
-            Continue Learning
+            Fortsätt lära dig
           </Button>
         </div>
       )}
 
-      {/* Course Header */}
+      {/* Kursrubrik */}
       <div className="relative mb-6">
         <div className="h-60 w-full rounded-xl overflow-hidden">
           <img 
@@ -146,19 +146,19 @@ export function CourseDetails({ courseId }: CourseDetailsProps) {
                 onClick={() => navigate(`/courses/${course.id}/edit`)}
               >
                 <Edit className="h-4 w-4 mr-2" />
-                Edit Course
+                Redigera kurs
               </Button>
             )}
           </div>
         </div>
       </div>
 
-      {/* Course Info */}
+      {/* Kursinformation */}
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <div className="flex items-center mb-4">
             <Calendar className="h-5 w-5 text-primary mr-2" />
-            <h3 className="font-medium">Created On</h3>
+            <h3 className="font-medium">Skapad</h3>
           </div>
           <p className="text-gray-600">{formatDate(course.createdAt)}</p>
         </div>
@@ -166,11 +166,11 @@ export function CourseDetails({ courseId }: CourseDetailsProps) {
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <div className="flex items-center mb-4">
             <Users className="h-5 w-5 text-primary mr-2" />
-            <h3 className="font-medium">Instructor</h3>
+            <h3 className="font-medium">Lärare</h3>
           </div>
           <div className="flex items-center">
             <div className="w-8 h-8 rounded-full bg-gray-200 flex items-center justify-center text-gray-600 font-medium">
-              {course.author?.fullName?.charAt(0) || "I"}
+              {course.author?.fullName?.charAt(0) || "L"}
             </div>
             <p className="text-gray-600 ml-2">{course.author?.fullName}</p>
           </div>
@@ -179,29 +179,29 @@ export function CourseDetails({ courseId }: CourseDetailsProps) {
         <div className="bg-white rounded-xl shadow-sm p-6 border border-gray-100">
           <div className="flex items-center mb-4">
             <Clock className="h-5 w-5 text-primary mr-2" />
-            <h3 className="font-medium">Duration</h3>
+            <h3 className="font-medium">Längd</h3>
           </div>
           <div className="grid grid-cols-2 gap-4">
             <div>
-              <p className="text-gray-600">{course.duration} weeks</p>
-              <p className="text-sm text-gray-500">Estimated time</p>
+              <p className="text-gray-600">{course.duration} veckor</p>
+              <p className="text-sm text-gray-500">Uppskattad tid</p>
             </div>
             <div>
               <p className="text-gray-600">{course.level}</p>
-              <p className="text-sm text-gray-500">Difficulty</p>
+              <p className="text-sm text-gray-500">Svårighetsgrad</p>
             </div>
           </div>
         </div>
       </div>
 
       <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-        {/* Course Content */}
+        {/* Kursinnehåll */}
         <div className="md:col-span-2">
           <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden">
             <div className="p-6 border-b border-gray-100">
-              <h2 className="text-xl font-semibold">Course Content</h2>
+              <h2 className="text-xl font-semibold">Kursinnehåll</h2>
               <p className="text-gray-600 text-sm mt-1">
-                {course.modules?.length || 0} modules • {course.modules?.reduce((total, module) => total + (module.lessons?.length || 0), 0) || 0} lessons
+                {course.modules?.length || 0} moduler • {course.modules?.reduce((total, module) => total + (module.lessons?.length || 0), 0) || 0} lektioner
               </p>
             </div>
             {course.modules && course.modules.length > 0 ? (
@@ -219,7 +219,7 @@ export function CourseDetails({ courseId }: CourseDetailsProps) {
                         )}
                       </div>
                       <div className="flex items-center">
-                        <span className="text-sm text-gray-500 mr-2">{module.lessons?.length || 0} lessons</span>
+                        <span className="text-sm text-gray-500 mr-2">{module.lessons?.length || 0} lektioner</span>
                         {expandedModuleId === module.id.toString() ? (
                           <ChevronUp className="h-5 w-5 text-gray-400" />
                         ) : (
@@ -240,10 +240,10 @@ export function CourseDetails({ courseId }: CourseDetailsProps) {
                               <span className="text-xs text-gray-500 mr-2">{lesson.duration} min</span>
                               {course.isEnrolled ? (
                                 <Button size="sm" variant="outline" asChild>
-                                  <Link href={`/lessons/${lesson.id}`}>View</Link>
+                                  <Link href={`/lessons/${lesson.id}`}>Visa</Link>
                                 </Button>
                               ) : (
-                                <Badge variant="outline">Locked</Badge>
+                                <Badge variant="outline">Låst</Badge>
                               )}
                             </div>
                           </div>
@@ -255,7 +255,7 @@ export function CourseDetails({ courseId }: CourseDetailsProps) {
               </div>
             ) : (
               <div className="p-6 text-center">
-                <p className="text-gray-500">No content available for this course yet.</p>
+                <p className="text-gray-500">Inget innehåll tillgängligt för denna kurs ännu.</p>
               </div>
             )}
           </div>

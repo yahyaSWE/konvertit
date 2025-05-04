@@ -27,8 +27,8 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 const loginSchema = z.object({
-  username: z.string().min(1, "Username is required"),
-  password: z.string().min(1, "Password is required"),
+  username: z.string().min(1, "Användarnamn krävs"),
+  password: z.string().min(1, "Lösenord krävs"),
 });
 
 type LoginFormValues = z.infer<typeof loginSchema>;
@@ -56,11 +56,11 @@ export function LoginForm() {
       
       login(user);
       toast({
-        title: "Login successful",
-        description: `Welcome back, ${user.fullName}!`,
+        title: "Inloggning lyckades",
+        description: `Välkommen tillbaka, ${user.fullName}!`,
       });
       
-      // Redirect based on role
+      // Omdirigera baserat på roll
       if (user.role === "admin") {
         navigate("/admin/dashboard");
       } else if (user.role === "teacher") {
@@ -70,8 +70,8 @@ export function LoginForm() {
       }
     } catch (error: any) {
       toast({
-        title: "Login failed",
-        description: error.message || "Invalid username or password",
+        title: "Inloggning misslyckades",
+        description: error.message || "Ogiltigt användarnamn eller lösenord",
         variant: "destructive",
       });
     } finally {
@@ -82,9 +82,9 @@ export function LoginForm() {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center">Login to LearnSmart</CardTitle>
+        <CardTitle className="text-2xl font-bold text-center">Logga in på LäraSmart</CardTitle>
         <CardDescription className="text-center">
-          Enter your credentials to access your account
+          Ange dina inloggningsuppgifter för att komma åt ditt konto
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -95,9 +95,9 @@ export function LoginForm() {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Användarnamn</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your username" {...field} />
+                    <Input placeholder="Ange ditt användarnamn" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -108,11 +108,11 @@ export function LoginForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Lösenord</FormLabel>
                   <FormControl>
                     <Input
                       type="password"
-                      placeholder="Enter your password"
+                      placeholder="Ange ditt lösenord"
                       {...field}
                     />
                   </FormControl>
@@ -125,16 +125,16 @@ export function LoginForm() {
               className="w-full mt-2"
               disabled={isLoading}
             >
-              {isLoading ? "Signing in..." : "Sign In"}
+              {isLoading ? "Loggar in..." : "Logga in"}
             </Button>
           </form>
         </Form>
       </CardContent>
       <CardFooter className="flex justify-center">
         <p className="text-sm text-gray-500">
-          Don't have an account?{" "}
+          Har du inget konto?{" "}
           <Button variant="link" className="p-0" onClick={() => navigate("/register")}>
-            Sign up
+            Registrera dig
           </Button>
         </p>
       </CardFooter>
