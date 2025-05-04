@@ -4,6 +4,7 @@ import { MobileNav } from "./mobile-nav";
 import { useAuth } from "@/hooks/use-auth";
 import { Loader2, Home, BookOpen, Star, User, Settings, LogOut, Moon, Sun } from "lucide-react";
 import { useTheme } from "@/components/ui/theme-provider";
+import ThemeButton from "@/components/theme-button";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -63,18 +64,7 @@ export function AppLayout({ children }: AppLayoutProps) {
             <h1 className="text-lg font-poppins font-bold text-textColor dark:text-white">Konvertit Guiden</h1>
           </div>
           <div className="flex items-center space-x-2">
-            <button
-              type="button"
-              className="p-2 rounded-full text-gray-500 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
-              onClick={toggleTheme}
-              aria-label={theme === 'light' ? 'Byt till mörkt läge' : 'Byt till ljust läge'}
-            >
-              {theme === 'light' ? (
-                <Moon className="h-5 w-5" />
-              ) : (
-                <Sun className="h-5 w-5" />
-              )}
-            </button>
+            <ThemeButton />
             <button
               type="button"
               className="p-2 rounded-full text-gray-500 hover:bg-gray-100 dark:text-gray-300 dark:hover:bg-gray-800"
@@ -149,9 +139,12 @@ export function AppLayout({ children }: AppLayoutProps) {
                 Inställningar
               </a>
               <div className="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100 dark:text-white dark:hover:bg-gray-800">
-                <Moon className="w-5 h-5 mr-3" />
+                {theme === 'light' ? <Moon className="w-5 h-5 mr-3" /> : <Sun className="w-5 h-5 mr-3" />}
                 <button
-                  onClick={toggleTheme}
+                  onClick={() => {
+                    console.log("Mobile toggleTheme clicked, current theme:", theme);
+                    setTheme(theme === "dark" ? "light" : "dark");
+                  }}
                   className="w-full text-left"
                 >
                   {theme === 'light' ? 'Mörkt läge' : 'Ljust läge'}

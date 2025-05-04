@@ -3,6 +3,7 @@ import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/use-auth";
 import { UserRole } from "@shared/schema";
 import { useTheme } from "@/components/ui/theme-provider";
+import ThemeButton from "@/components/theme-button";
 
 import {
   BarChart2,
@@ -177,7 +178,12 @@ export function Sidebar() {
             </Link>
           ))}
           <button
-            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            onClick={() => {
+              console.log("Sidebar toggleTheme clicked, current theme:", theme);
+              const newTheme = theme === "dark" ? "light" : "dark";
+              console.log("Setting theme to:", newTheme);
+              setTheme(newTheme);
+            }}
             className="sidebar-item flex items-center px-3 py-2 text-sm rounded-md w-full text-left text-sidebar-foreground"
           >
             {theme === "light" ? (

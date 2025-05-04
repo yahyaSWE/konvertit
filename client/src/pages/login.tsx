@@ -25,8 +25,8 @@ export default function Login() {
         <div className="inline-flex items-center justify-center w-16 h-16 rounded-full bg-primary mb-4">
           <Lightbulb className="h-8 w-8 text-white" />
         </div>
-        <h1 className="text-3xl font-bold font-poppins">LäraSmart</h1>
-        <p className="text-gray-500 mt-2">Din inlärningsresa börjar här</p>
+        <h1 className="text-3xl font-bold font-poppins">Konvertit Guiden</h1>
+        <p className="text-gray-500 dark:text-gray-400 mt-2">Din inlärningsresa börjar här</p>
       </div>
       
       <LoginForm />
