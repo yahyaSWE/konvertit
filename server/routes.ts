@@ -79,7 +79,7 @@ export async function registerRoutes(app: Express): Promise<Server> {
   };
 
   const isTeacher = (req: Request, res: Response, next: any) => {
-    if (req.isAuthenticated() && (req.user as any).role === UserRole.TEACHER) {
+    if (req.isAuthenticated() && ((req.user as any).role === UserRole.TEACHER || (req.user as any).role === UserRole.ADMIN)) {
       return next();
     }
     res.status(403).json({ message: "Forbidden" });
