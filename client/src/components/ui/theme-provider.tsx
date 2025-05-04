@@ -35,13 +35,15 @@ export function ThemeProvider({
 
     root.classList.remove("light", "dark");
     root.classList.add(theme);
+    console.log("Theme changed to:", theme);
   }, [theme]);
 
   const value = {
     theme,
-    setTheme: (theme: Theme) => {
-      localStorage.setItem(storageKey, theme);
-      setTheme(theme);
+    setTheme: (newTheme: Theme) => {
+      console.log("Setting theme to:", newTheme);
+      localStorage.setItem(storageKey, newTheme);
+      setTheme(newTheme);
     },
   };
 
