@@ -49,9 +49,9 @@ export function CourseList() {
       <Card className="text-center p-8">
         <CardContent className="pt-6">
           <BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
-          <p className="text-lg font-medium">No courses available</p>
+          <p className="text-lg font-medium">Inga kurser tillgängliga</p>
           <p className="text-muted-foreground mt-2">
-            Check back later for new course offerings or contact support.
+            Återkom senare för nya kurserbjudanden eller kontakta support.
           </p>
         </CardContent>
       </Card>
@@ -75,15 +75,15 @@ export function CourseList() {
   return (
     <div>
       <div className="mb-6">
-        <CardTitle className="text-2xl mb-2">Explore Courses</CardTitle>
-        <CardDescription>Discover new skills, subjects, and creative topics</CardDescription>
+        <CardTitle className="text-2xl mb-2">Utforska kurser</CardTitle>
+        <CardDescription>Upptäck nya färdigheter, ämnen och kreativa ämnen</CardDescription>
       </div>
 
       <div className="flex flex-col sm:flex-row gap-4 mb-6">
         <div className="relative flex-1">
           <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-400" size={18} />
           <Input
-            placeholder="Search courses..."
+            placeholder="Sök kurser..."
             className="pl-10"
             value={searchTerm}
             onChange={(e) => setSearchTerm(e.target.value)}
@@ -92,10 +92,10 @@ export function CourseList() {
         <div className="flex gap-2">
           <Select value={categoryFilter} onValueChange={setCategoryFilter}>
             <SelectTrigger className="w-[160px]">
-              <SelectValue placeholder="Category" />
+              <SelectValue placeholder="Kategori" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Categories</SelectItem>
+              <SelectItem value="all">Alla kategorier</SelectItem>
               {categories.map((category) => (
                 <SelectItem key={category} value={category}>{category}</SelectItem>
               ))}
@@ -104,10 +104,10 @@ export function CourseList() {
           
           <Select value={levelFilter} onValueChange={setLevelFilter}>
             <SelectTrigger className="w-[160px]">
-              <SelectValue placeholder="Level" />
+              <SelectValue placeholder="Nivå" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Levels</SelectItem>
+              <SelectItem value="all">Alla nivåer</SelectItem>
               {levels.map((level) => (
                 <SelectItem key={level} value={level}>{level}</SelectItem>
               ))}
@@ -119,9 +119,9 @@ export function CourseList() {
       {filteredCourses.length === 0 ? (
         <Card className="text-center p-8">
           <CardContent className="pt-6">
-            <p className="text-lg font-medium">No matching courses found</p>
+            <p className="text-lg font-medium">Inga matchande kurser hittades</p>
             <p className="text-muted-foreground mt-2">
-              Try adjusting your search or filters to find what you're looking for.
+              Försök justera din sökning eller filter för att hitta vad du letar efter.
             </p>
             <Button 
               variant="outline" 
@@ -132,7 +132,7 @@ export function CourseList() {
                 setLevelFilter("all");
               }}
             >
-              Clear Filters
+              Rensa filter
             </Button>
           </CardContent>
         </Card>
@@ -183,10 +183,10 @@ function CourseCard({ course }: CourseCardProps) {
         <div className="flex items-center text-sm text-gray-500">
           <span className="flex items-center">
             <BookOpen className="h-4 w-4 mr-1" />
-            {course.duration} weeks
+            {course.duration} veckor
           </span>
           <span className="mx-2">•</span>
-          <span>{course.points} points</span>
+          <span>{course.points} poäng</span>
         </div>
       </CardContent>
       <CardFooter className="flex justify-between pt-2">

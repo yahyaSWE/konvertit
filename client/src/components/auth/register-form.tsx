@@ -35,10 +35,10 @@ import { Button } from "@/components/ui/button";
 import { UserRole } from "@shared/schema";
 
 const registerSchema = z.object({
-  username: z.string().min(3, "Username must be at least 3 characters"),
-  email: z.string().email("Please enter a valid email address"),
-  password: z.string().min(6, "Password must be at least 6 characters"),
-  fullName: z.string().min(2, "Full name is required"),
+  username: z.string().min(3, "Användarnamnet måste vara minst 3 tecken"),
+  email: z.string().email("Ange en giltig e-postadress"),
+  password: z.string().min(6, "Lösenordet måste vara minst 6 tecken"),
+  fullName: z.string().min(2, "Fullständigt namn krävs"),
   role: z.enum(["student", "teacher"]),
 });
 
@@ -70,15 +70,15 @@ export function RegisterForm() {
       
       login(user);
       toast({
-        title: "Registration successful",
-        description: `Welcome to LearnSmart, ${user.fullName}!`,
+        title: "Registrering lyckades",
+        description: `Välkommen till LäraSmart, ${user.fullName}!`,
       });
       
       navigate("/dashboard");
     } catch (error: any) {
       toast({
-        title: "Registration failed",
-        description: error.message || "Could not create account. Please try again.",
+        title: "Registrering misslyckades",
+        description: error.message || "Kunde inte skapa konto. Försök igen.",
         variant: "destructive",
       });
     } finally {
@@ -89,9 +89,9 @@ export function RegisterForm() {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center">Create an Account</CardTitle>
+        <CardTitle className="text-2xl font-bold text-center">Skapa ett konto</CardTitle>
         <CardDescription className="text-center">
-          Join LearnSmart and start your learning journey
+          Gå med i LäraSmart och börja din inlärningsresa
         </CardDescription>
       </CardHeader>
       <CardContent>
@@ -102,9 +102,9 @@ export function RegisterForm() {
               name="fullName"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Full Name</FormLabel>
+                  <FormLabel>Fullständigt namn</FormLabel>
                   <FormControl>
-                    <Input placeholder="Enter your full name" {...field} />
+                    <Input placeholder="Ange ditt fullständiga namn" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -115,9 +115,9 @@ export function RegisterForm() {
               name="username"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Username</FormLabel>
+                  <FormLabel>Användarnamn</FormLabel>
                   <FormControl>
-                    <Input placeholder="Choose a username" {...field} />
+                    <Input placeholder="Välj ett användarnamn" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -128,9 +128,9 @@ export function RegisterForm() {
               name="email"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Email</FormLabel>
+                  <FormLabel>E-post</FormLabel>
                   <FormControl>
-                    <Input type="email" placeholder="Enter your email" {...field} />
+                    <Input type="email" placeholder="Ange din e-postadress" {...field} />
                   </FormControl>
                   <FormMessage />
                 </FormItem>
@@ -141,11 +141,11 @@ export function RegisterForm() {
               name="password"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>Password</FormLabel>
+                  <FormLabel>Lösenord</FormLabel>
                   <FormControl>
                     <Input
                       type="password"
-                      placeholder="Create a password"
+                      placeholder="Skapa ett lösenord"
                       {...field}
                     />
                   </FormControl>
@@ -158,19 +158,19 @@ export function RegisterForm() {
               name="role"
               render={({ field }) => (
                 <FormItem>
-                  <FormLabel>I want to</FormLabel>
+                  <FormLabel>Jag vill</FormLabel>
                   <Select
                     onValueChange={field.onChange}
                     defaultValue={field.value}
                   >
                     <FormControl>
                       <SelectTrigger>
-                        <SelectValue placeholder="Select your role" />
+                        <SelectValue placeholder="Välj din roll" />
                       </SelectTrigger>
                     </FormControl>
                     <SelectContent>
-                      <SelectItem value={UserRole.STUDENT}>Learn new skills</SelectItem>
-                      <SelectItem value={UserRole.TEACHER}>Teach others</SelectItem>
+                      <SelectItem value={UserRole.STUDENT}>Lära mig nya färdigheter</SelectItem>
+                      <SelectItem value={UserRole.TEACHER}>Lära andra</SelectItem>
                     </SelectContent>
                   </Select>
                   <FormMessage />
@@ -182,16 +182,16 @@ export function RegisterForm() {
               className="w-full mt-2"
               disabled={isLoading}
             >
-              {isLoading ? "Creating account..." : "Create Account"}
+              {isLoading ? "Skapar konto..." : "Skapa konto"}
             </Button>
           </form>
         </Form>
       </CardContent>
       <CardFooter className="flex justify-center">
         <p className="text-sm text-gray-500">
-          Already have an account?{" "}
+          Har du redan ett konto?{" "}
           <Button variant="link" className="p-0" onClick={() => navigate("/login")}>
-            Sign in
+            Logga in
           </Button>
         </p>
       </CardFooter>

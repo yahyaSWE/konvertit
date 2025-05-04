@@ -11,7 +11,7 @@ export default function Courses() {
   const { user, isLoading } = useAuth();
   const [, navigate] = useLocation();
 
-  // Redirect to login if not authenticated
+  // Omdirigera till inloggning om inte autentiserad
   useEffect(() => {
     if (!isLoading && !user) {
       navigate("/login");
@@ -23,15 +23,15 @@ export default function Courses() {
       <div className="p-6">
         <div className="flex justify-between items-center mb-8">
           <div>
-            <h1 className="text-2xl font-poppins font-bold text-textColor">Courses</h1>
-            <p className="text-gray-600">Browse and discover learning opportunities</p>
+            <h1 className="text-2xl font-poppins font-bold text-textColor">Kurser</h1>
+            <p className="text-gray-600">Bläddra och upptäck utbildningsmöjligheter</p>
           </div>
           
-          {/* Show course creation button for teachers and admins */}
+          {/* Visa kursknapp för lärare och administratörer */}
           {user && (user.role === UserRole.TEACHER || user.role === UserRole.ADMIN) && (
             <Button onClick={() => navigate("/courses/create")}>
               <PlusCircle className="h-4 w-4 mr-2" />
-              Create Course
+              Skapa kurs
             </Button>
           )}
         </div>
