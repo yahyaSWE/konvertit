@@ -82,7 +82,7 @@ export function LoginForm() {
   return (
     <Card className="w-full max-w-md mx-auto">
       <CardHeader>
-        <CardTitle className="text-2xl font-bold text-center">Logga in på LäraSmart</CardTitle>
+        <CardTitle className="text-2xl font-bold text-center">Logga in</CardTitle>
         <CardDescription className="text-center">
           Ange dina inloggningsuppgifter för att komma åt ditt konto
         </CardDescription>
