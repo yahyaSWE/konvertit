@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Sidebar } from "./sidebar";
 import { MobileNav } from "./mobile-nav";
 import { useAuth } from "@/hooks/use-auth";
-import { Loader2 } from "lucide-react";
+import { Loader2, Home, BookOpen, Star, User, Settings, LogOut } from "lucide-react";
 
 interface AppLayoutProps {
   children: React.ReactNode;
@@ -10,7 +10,7 @@ interface AppLayoutProps {
 
 export function AppLayout({ children }: AppLayoutProps) {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const { user, isLoading } = useAuth();
+  const { user, isLoading, logout } = useAuth();
 
   if (isLoading) {
     return (
@@ -108,7 +108,33 @@ export function AppLayout({ children }: AppLayoutProps) {
               </button>
             </div>
             <div className="space-y-4">
-              {/* Mobile menu content here */}
+              <a href="/dashboard" className="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">
+                <Home className="w-5 h-5 mr-3" />
+                Hem
+              </a>
+              <a href="/courses" className="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">
+                <BookOpen className="w-5 h-5 mr-3" />
+                Kurser
+              </a>
+              <a href="/achievements" className="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">
+                <Star className="w-5 h-5 mr-3" />
+                Prestationer
+              </a>
+              <a href="/profile" className="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">
+                <User className="w-5 h-5 mr-3" />
+                Profil
+              </a>
+              <a href="/settings" className="flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100">
+                <Settings className="w-5 h-5 mr-3" />
+                Inställningar
+              </a>
+              <button 
+                onClick={logout}
+                className="w-full flex items-center px-3 py-2 text-sm font-medium rounded-md hover:bg-gray-100 text-red-600"
+              >
+                <LogOut className="w-5 h-5 mr-3" />
+                Logga ut
+              </button>
             </div>
           </div>
         </div>

@@ -11,25 +11,25 @@ export function MobileNav() {
         <NavItem 
           href="/dashboard" 
           icon={<Home className="h-6 w-6" />} 
-          label="Home"
+          label="Hem"
           isActive={location === "/" || location === "/dashboard"} 
         />
         <NavItem 
           href="/courses" 
           icon={<BookOpen className="h-6 w-6" />} 
-          label="Courses"
+          label="Kurser"
           isActive={location.startsWith("/courses")} 
         />
         <NavItem 
           href="/achievements" 
           icon={<Star className="h-6 w-6" />} 
-          label="Achievements"
+          label="Prestationer"
           isActive={location === "/achievements"} 
         />
         <NavItem 
           href="/profile" 
           icon={<User className="h-6 w-6" />} 
-          label="Profile"
+          label="Profil"
           isActive={location === "/profile" || location === "/settings"} 
         />
       </div>
