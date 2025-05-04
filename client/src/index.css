@@ -5,78 +5,98 @@
 @tailwind utilities;
 
 :root {
-  --background: 210 40% 98%;
-  --foreground: 20 14.3% 4.1%;
+  /* Base colors from islam.nu - using a green/teal theme */
+  --background: 0 0% 98%;
+  --foreground: 140 5% 20%;
   --card: 0 0% 100%;
-  --card-foreground: 20 14.3% 4.1%;
+  --card-foreground: 140 5% 20%;
   --popover: 0 0% 100%;
-  --popover-foreground: 20 14.3% 4.1%;
-  --primary: 221 83% 53%;
-  --primary-foreground: 211 100% 99%;
-  --secondary: 158 72% 40%;
-  --secondary-foreground: 210 40% 98%;
-  --muted: 60 4.8% 95.9%;
-  --muted-foreground: 25 5.3% 44.7%;
-  --accent: 239 84% 67%;
-  --accent-foreground: 211 100% 99%;
+  --popover-foreground: 140 5% 20%;
+  
+  /* Primary: Green from islam.nu */
+  --primary: 160 84% 39%;
+  --primary-foreground: 0 0% 100%;
+  
+  /* Secondary: Darker Green */
+  --secondary: 160 80% 25%;
+  --secondary-foreground: 0 0% 100%;
+  
+  /* Accent: Gold/Yellow from islam.nu */
+  --accent: 40 80% 50%;
+  --accent-foreground: 140 5% 20%;
+  
+  --muted: 160 15% 94%;
+  --muted-foreground: 160 5% 40%;
   --destructive: 0 84.2% 60.2%;
-  --destructive-foreground: 60 9.1% 97.8%;
-  --border: 20 5.9% 90%;
-  --input: 20 5.9% 90%;
-  --ring: 221 83% 53%;
+  --destructive-foreground: 0 0% 98%;
+  --border: 160 15% 90%;
+  --input: 160 15% 90%;
+  --ring: 160 84% 39%;
   --radius: 0.5rem;
 
-  --chart-1: 221 83% 53%;
-  --chart-2: 158 72% 40%;
-  --chart-3: 239 84% 67%;
-  --chart-4: 0 84.2% 60.2%;
-  --chart-5: 43 96% 56%;
+  /* Chart colors */
+  --chart-1: 160 84% 39%;
+  --chart-2: 160 80% 25%;
+  --chart-3: 40 80% 50%;
+  --chart-4: 190 80% 45%;
+  --chart-5: 120 60% 45%;
 
-  --sidebar-background: 0 0% 100%;
-  --sidebar-foreground: 20 14.3% 4.1%;
-  --sidebar-primary: 221 83% 53%;
-  --sidebar-primary-foreground: 211 100% 99%;
-  --sidebar-accent: 243 75% 59%;
-  --sidebar-accent-foreground: 0 0% 100%;
-  --sidebar-border: 240 5.9% 90%;
-  --sidebar-ring: 240 5% 64.9%;
+  /* Sidebar */
+  --sidebar-background: 160 40% 15%;
+  --sidebar-foreground: 0 0% 100%;
+  --sidebar-primary: 160 84% 39%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 40 80% 50%;
+  --sidebar-accent-foreground: 140 5% 20%;
+  --sidebar-border: 160 20% 25%;
+  --sidebar-ring: 160 40% 45%;
 }
 
 .dark {
-  --background: 240 10% 3.9%;
+  /* Dark mode colors to match the islam.nu theme */
+  --background: 165 20% 12%;
   --foreground: 0 0% 98%;
-  --card: 240 10% 3.9%;
+  --card: 165 25% 15%;
   --card-foreground: 0 0% 98%;
-  --popover: 240 10% 3.9%;
+  --popover: 165 25% 15%;
   --popover-foreground: 0 0% 98%;
-  --primary: 221 83% 53%;
-  --primary-foreground: 211 100% 99%;
-  --secondary: 158 72% 40%;
-  --secondary-foreground: 211 100% 99%;
-  --muted: 240 3.7% 15.9%;
-  --muted-foreground: 240 5% 64.9%;
-  --accent: 239 84% 67%;
-  --accent-foreground: 211 100% 99%;
-  --destructive: 0 62.8% 30.6%;
+  
+  /* Primary: Slightly brighter green for dark mode visibility */
+  --primary: 160 70% 45%;
+  --primary-foreground: 0 0% 100%;
+  
+  /* Secondary: Dark teal */
+  --secondary: 160 60% 30%;
+  --secondary-foreground: 0 0% 100%;
+  
+  /* Accent: Brighter gold/yellow for contrast */
+  --accent: 40 85% 55%;
+  --accent-foreground: 0 0% 10%;
+  
+  --muted: 165 25% 20%;
+  --muted-foreground: 160 10% 75%;
+  --destructive: 0 70% 45%;
   --destructive-foreground: 0 0% 98%;
-  --border: 240 3.7% 15.9%;
-  --input: 240 3.7% 15.9%;
-  --ring: 240 4.9% 83.9%;
+  --border: 165 25% 25%;
+  --input: 165 25% 25%;
+  --ring: 160 70% 45%;
 
-  --chart-1: 221 83% 53%;
-  --chart-2: 158 72% 40%;
-  --chart-3: 239 84% 67%;
-  --chart-4: 0 84.2% 60.2%;
-  --chart-5: 43 96% 56%;
+  /* Chart colors - brighter for dark mode */
+  --chart-1: 160 70% 45%;
+  --chart-2: 160 60% 30%;
+  --chart-3: 40 85% 55%;
+  --chart-4: 190 70% 55%;
+  --chart-5: 120 70% 50%;
 
-  --sidebar-background: 240 10% 3.9%;
+  /* Sidebar */
+  --sidebar-background: 165 30% 10%;
   --sidebar-foreground: 0 0% 98%;
-  --sidebar-primary: 221 83% 53%;
-  --sidebar-primary-foreground: 211 100% 99%;
-  --sidebar-accent: 243 75% 59%;
-  --sidebar-accent-foreground: 0 0% 100%;
-  --sidebar-border: 240 3.7% 15.9%;
-  --sidebar-ring: 240 4.9% 83.9%;
+  --sidebar-primary: 160 70% 45%;
+  --sidebar-primary-foreground: 0 0% 100%;
+  --sidebar-accent: 40 85% 55%;
+  --sidebar-accent-foreground: 0 0% 10%;
+  --sidebar-border: 165 30% 20%;
+  --sidebar-ring: 160 70% 45%;
 }
 
 @layer base {
@@ -134,7 +154,7 @@
 }
 
 .sidebar-item:hover:not(.active) {
-  background-color: rgba(99, 102, 241, 0.1);
+  background-color: rgba(22, 163, 127, 0.15);
 }
 
 .sidebar-item.active {
