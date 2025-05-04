@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "wouter";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -157,7 +157,7 @@ export function CourseEditor({ courseId }: CourseEditorProps) {
   });
 
   // Load course data into form
-  React.useEffect(() => {
+  useEffect(() => {
     if (courseData) {
       courseForm.reset({
         title: courseData.title,
