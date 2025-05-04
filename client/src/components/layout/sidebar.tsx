@@ -172,19 +172,25 @@ export function Sidebar() {
           ))}
           <button
             onClick={() => {
-              console.log("Sidebar toggleTheme clicked, current theme:", theme);
-              const newTheme = theme === "dark" ? "light" : "dark";
-              console.log("Setting theme to:", newTheme);
-              setTheme(newTheme);
+              const root = window.document.documentElement;
+              const isDark = root.classList.contains("dark");
+              
+              if (isDark) {
+                root.classList.remove("dark");
+                root.classList.add("light");
+                localStorage.setItem("konvertit-theme", "light");
+                console.log("Theme set to light (direct from sidebar)");
+              } else {
+                root.classList.remove("light");
+                root.classList.add("dark");
+                localStorage.setItem("konvertit-theme", "dark");
+                console.log("Theme set to dark (direct from sidebar)");
+              }
             }}
             className="sidebar-item flex items-center px-3 py-2 text-sm rounded-md w-full text-left text-sidebar-foreground"
           >
-            {theme === "light" ? (
-              <Moon className="w-5 h-5 mr-3" />
-            ) : (
-              <Sun className="w-5 h-5 mr-3" />
-            )}
-            {theme === "light" ? "Mörkt läge" : "Ljust läge"}
+            <Moon className="w-5 h-5 mr-3" />
+            Byt tema
           </button>
           <button
             onClick={logout}
