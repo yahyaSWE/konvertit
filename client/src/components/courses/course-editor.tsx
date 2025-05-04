@@ -933,6 +933,23 @@ export function CourseEditor({ courseId }: CourseEditorProps) {
                 )}
               />
 
+              <FormField
+                control={lessonForm.control}
+                name="videoUrl"
+                render={({ field }) => (
+                  <FormItem>
+                    <FormLabel>Video URL</FormLabel>
+                    <FormControl>
+                      <Input placeholder="e.g. https://www.youtube.com/watch?v=example" {...field} />
+                    </FormControl>
+                    <FormDescription>
+                      URL to a YouTube or similar video platform (optional)
+                    </FormDescription>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+
               <div className="grid grid-cols-1 md:grid-cols-3 gap-4">
                 <FormField
                   control={lessonForm.control}

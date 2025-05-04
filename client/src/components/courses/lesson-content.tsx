@@ -13,6 +13,38 @@ import {
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/hooks/use-toast";
 
+// Helper function to format video URLs for embedding
+function formatVideoUrl(url: string): string {
+  if (!url) return '';
+  
+  // YouTube URL format conversion
+  if (url.includes('youtube.com/watch')) {
+    // Convert standard YouTube URL to embed format
+    const videoId = new URL(url).searchParams.get('v');
+    if (videoId) {
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+  } else if (url.includes('youtu.be/')) {
+    // Convert short YouTube URL to embed format
+    const videoId = url.split('youtu.be/')[1]?.split('?')[0];
+    if (videoId) {
+      return `https://www.youtube.com/embed/${videoId}`;
+    }
+  } else if (url.includes('youtube.com/embed/')) {
+    // Already in embed format
+    return url;
+  } else if (url.includes('vimeo.com/')) {
+    // Convert Vimeo URL to embed format
+    const vimeoId = url.split('vimeo.com/')[1]?.split('?')[0];
+    if (vimeoId) {
+      return `https://player.vimeo.com/video/${vimeoId}`;
+    }
+  }
+  
+  // Return original URL if no formatting needed or unsupported format
+  return url;
+}
+
 interface LessonContentProps {
   lessonId: string;
 }
@@ -59,8 +91,7 @@ export function LessonContent({ lessonId }: LessonContentProps) {
       
       toast({
         title: "Lesson completed",
-        description: "Your progress has been updated",
-        variant: "success"
+        description: "Your progress has been updated"
       });
     },
     onError: (error: any) => {
@@ -156,14 +187,26 @@ export function LessonContent({ lessonId }: LessonContentProps) {
       <div className="bg-white rounded-xl shadow-sm border border-gray-100 overflow-hidden mb-6">
         <div className="p-6">
           {lesson.type === 'video' ? (
-            <div className="aspect-video bg-gray-100 rounded-lg flex items-center justify-center mb-6">
-              <div className="text-center">
-                <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-gray-400 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
-                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
-                </svg>
-                <p className="text-gray-500">Video content would be displayed here</p>
-              </div>
+            <div className="aspect-video rounded-lg overflow-hidden mb-6">
+              {lesson.videoUrl ? (
+                <iframe
+                  src={formatVideoUrl(lesson.videoUrl)}
+                  className="w-full h-full border-0"
+                  title={lesson.title}
+                  allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+                  allowFullScreen
+                ></iframe>
+              ) : (
+                <div className="w-full h-full bg-gray-100 flex items-center justify-center">
+                  <div className="text-center">
+                    <svg xmlns="http://www.w3.org/2000/svg" className="h-12 w-12 text-gray-400 mx-auto mb-2" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M14.752 11.168l-3.197-2.132A1 1 0 0010 9.87v4.263a1 1 0 001.555.832l3.197-2.132a1 1 0 000-1.664z" />
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M21 12a9 9 0 11-18 0 9 9 0 0118 0z" />
+                    </svg>
+                    <p className="text-gray-500">No video URL provided</p>
+                  </div>
+                </div>
+              )}
             </div>
           ) : null}
           
