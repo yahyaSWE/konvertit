@@ -18,42 +18,42 @@ export function AchievementsShowcase() {
   // Map achievements to display properties
   const achievementsData = [
     {
-      name: "First Course Completed",
+      name: "Första kursen avslutad",
       date: userAchievements?.find(ua => ua.achievement?.title === "First Course Completed")?.unlockedAt,
       icon: <CheckCircle className="h-8 w-8" />,
       color: "bg-indigo-100 text-accent",
       unlocked: !!userAchievements?.find(ua => ua.achievement?.title === "First Course Completed")
     },
     {
-      name: "5-Day Streak",
+      name: "5-dagars svit",
       date: userAchievements?.find(ua => ua.achievement?.title === "5-Day Streak")?.unlockedAt,
       icon: <Zap className="h-8 w-8" />,
       color: "bg-green-100 text-secondary",
       unlocked: !!userAchievements?.find(ua => ua.achievement?.title === "5-Day Streak")
     },
     {
-      name: "Quiz Master",
+      name: "Quizmästare",
       date: userAchievements?.find(ua => ua.achievement?.title === "Quiz Master")?.unlockedAt,
       icon: <Star className="h-8 w-8" />,
       color: "bg-amber-100 text-amber-500",
       unlocked: !!userAchievements?.find(ua => ua.achievement?.title === "Quiz Master")
     },
     {
-      name: "Course Collector",
+      name: "Kurssamlare",
       date: userAchievements?.find(ua => ua.achievement?.title === "Course Collector")?.unlockedAt,
       icon: <Award className="h-8 w-8" />,
       color: "bg-blue-100 text-primary",
       unlocked: !!userAchievements?.find(ua => ua.achievement?.title === "Course Collector")
     },
     {
-      name: "Social Learner",
+      name: "Social lärande",
       date: null,
       icon: <Users className="h-8 w-8" />,
       color: "bg-gray-100 text-gray-400",
       unlocked: false
     },
     {
-      name: "Science Explorer",
+      name: "Vetenskapsutforskare",
       date: null,
       icon: <Beaker className="h-8 w-8" />,
       color: "bg-gray-100 text-gray-400",
@@ -64,9 +64,9 @@ export function AchievementsShowcase() {
   return (
     <div className="mb-10">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-xl font-poppins font-semibold text-textColor">Recent Achievements</h2>
+        <h2 className="text-xl font-poppins font-semibold text-textColor">Senaste prestationer</h2>
         <Link href="/achievements" className="text-primary text-sm font-medium hover:underline">
-          View all
+          Visa alla
         </Link>
       </div>
       
@@ -85,7 +85,7 @@ export function AchievementsShowcase() {
             <span className="text-xs text-gray-500">
               {achievement.unlocked 
                 ? formatDate(achievement.date || '') 
-                : "Locked"}
+                : "Låst"}
             </span>
           </div>
         ))}
