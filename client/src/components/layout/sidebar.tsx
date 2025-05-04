@@ -2,6 +2,7 @@ import { Link, useLocation } from "wouter";
 import { cn } from "@/lib/utils";
 import { useAuth } from "@/hooks/use-auth";
 import { UserRole } from "@shared/schema";
+import { useTheme } from "@/components/ui/theme-provider";
 
 import {
   BarChart2,
@@ -15,11 +16,14 @@ import {
   Users,
   Lightbulb,
   PenTool,
+  Moon,
+  Sun,
 } from "lucide-react";
 
 export function Sidebar() {
   const [location] = useLocation();
   const { user, logout } = useAuth();
+  const { theme, setTheme } = useTheme();
   const role = user?.role || "student";
 
   // Common menu items for all roles
@@ -173,11 +177,22 @@ export function Sidebar() {
             </Link>
           ))}
           <button
+            onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
+            className="sidebar-item flex items-center px-3 py-2 text-sm rounded-md w-full text-left text-sidebar-foreground"
+          >
+            {theme === "light" ? (
+              <Moon className="w-5 h-5 mr-3" />
+            ) : (
+              <Sun className="w-5 h-5 mr-3" />
+            )}
+            {theme === "light" ? "Mörkt läge" : "Ljust läge"}
+          </button>
+          <button
             onClick={logout}
             className="sidebar-item flex items-center px-3 py-2 text-sm text-red-600 rounded-md w-full text-left"
           >
             <LogOut className="w-5 h-5 mr-3" />
-            Logout
+            Logga ut
           </button>
         </div>
       </div>
