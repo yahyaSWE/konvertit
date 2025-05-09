@@ -1,14 +1,33 @@
-import { 
-  users, User, InsertUser,
-  courses, Course, InsertCourse,
-  modules, Module, InsertModule,
-  lessons, Lesson, InsertLesson,
-  enrollments, Enrollment, InsertEnrollment,
-  progress, Progress, InsertProgress,
-  achievements, Achievement, InsertAchievement,
-  userAchievements, UserAchievement, InsertUserAchievement,
-  certificates, Certificate, InsertCertificate
-} from "@shared/schema";
+import {
+  users,
+  User,
+  InsertUser,
+  courses,
+  Course,
+  InsertCourse,
+  modules,
+  Module,
+  InsertModule,
+  lessons,
+  Lesson,
+  InsertLesson,
+  enrollments,
+  Enrollment,
+  InsertEnrollment,
+  progress,
+  Progress,
+  InsertProgress,
+  achievements,
+  Achievement,
+  InsertAchievement,
+  userAchievements,
+  UserAchievement,
+  InsertUserAchievement,
+  certificates,
+  Certificate,
+  InsertCertificate,
+  UserRole,
+} from '@shared/schema';
 
 export interface IStorage {
   // Users
@@ -121,193 +140,168 @@ export class MemStorage implements IStorage {
     this.initializeData();
   }
 
-  private initializeData() {
-    // Create admin user
-    this.createUser({
-      username: "admin",
-      password: "admin123",
-      email: "admin@learnsmart.com",
-      fullName: "Admin User",
-      role: "admin",
+  private async initializeData() {
+    // Create sample users
+    const admin = await this.createUser({
+      username: 'admin',
+      password: 'admin123',
+      email: 'admin@example.com',
+      fullName: 'Admin User',
+      role: UserRole.ADMIN,
     });
 
-    // Create teacher user
-    this.createUser({
-      username: "teacher",
-      password: "teacher123",
-      email: "teacher@learnsmart.com",
-      fullName: "Teacher User",
-      role: "teacher",
+    const teacher = await this.createUser({
+      username: 'teacher',
+      password: 'teacher123',
+      email: 'teacher@example.com',
+      fullName: 'Teacher User',
+      role: UserRole.TEACHER,
     });
 
-    // Create student user
-    this.createUser({
-      username: "student",
-      password: "student123",
-      email: "student@learnsmart.com",
-      fullName: "Alex Johnson",
-      role: "student",
+    const student = await this.createUser({
+      username: 'student',
+      password: 'student123',
+      email: 'student@example.com',
+      fullName: 'Student User',
+      role: UserRole.STUDENT,
     });
 
     // Create sample courses
-    const webDevCourse = this.createCourse({
-      title: "Modern JavaScript Fundamentals",
-      description: "Master the essential concepts of JavaScript with practical examples and real-world applications.",
-      imageUrl: "https://images.unsplash.com/photo-1517694712202-14dd9538aa97?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=200&q=80",
-      category: "Web Development",
-      level: "Beginner",
+    const webDevCourse = await this.createCourse({
+      title: 'Web Development Fundamentals',
+      description: 'Learn the basics of web development',
+      category: 'Programming',
+      level: 'Beginner',
       duration: 8,
-      authorId: 2,
-      points: 350,
+      authorId: teacher.id,
+      points: 500,
     });
 
-    const pythonCourse = this.createCourse({
-      title: "Python for Data Analysis",
-      description: "Learn how to analyze and visualize data using Python's powerful libraries like Pandas and Matplotlib.",
-      imageUrl: "https://images.unsplash.com/photo-1581093199663-68c6a521388d?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=200&q=80",
-      category: "Data Science",
-      level: "Intermediate",
-      duration: 10,
-      authorId: 2,
-      points: 450,
-    });
-
-    const uxCourse = this.createCourse({
-      title: "UI/UX Design Principles",
-      description: "Discover the fundamentals of creating user-centered designs that engage and delight your audience.",
-      imageUrl: "https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=600&h=200&q=80",
-      category: "UX Design",
-      level: "Beginner",
+    const pythonCourse = await this.createCourse({
+      title: 'Python Programming',
+      description: 'Master Python programming language',
+      category: 'Programming',
+      level: 'Beginner',
       duration: 6,
-      authorId: 2,
+      authorId: teacher.id,
       points: 300,
     });
 
     // Create sample modules for JavaScript course
-    const jsModule1 = this.createModule({
+    const jsModule1 = await this.createModule({
       courseId: webDevCourse.id,
-      title: "JavaScript Basics",
-      description: "Learn the fundamentals of JavaScript programming",
+      title: 'JavaScript Basics',
+      description: 'Learn the fundamentals of JavaScript programming',
       order: 1,
     });
 
-    const jsModule2 = this.createModule({
+    const jsModule2 = await this.createModule({
       courseId: webDevCourse.id,
-      title: "Working with DOM",
-      description: "Manipulate HTML elements using JavaScript",
+      title: 'Working with DOM',
+      description: 'Manipulate HTML elements using JavaScript',
       order: 2,
     });
 
     // Create sample lessons for JavaScript modules
-    this.createLesson({
+    await this.createLesson({
       moduleId: jsModule1.id,
-      title: "Introduction to JavaScript",
-      content: "JavaScript is a programming language that runs in the browser...",
-      type: "text",
+      title: 'Introduction to JavaScript',
+      content: 'JavaScript is a programming language that runs in the browser...',
+      type: 'text',
       duration: 15,
       order: 1,
       points: 10,
     });
 
-    this.createLesson({
+    await this.createLesson({
       moduleId: jsModule1.id,
-      title: "Variables and Data Types",
-      content: "Learn about variables, constants, and data types in JavaScript...",
-      type: "text",
+      title: 'Variables and Data Types',
+      content: 'Learn about variables, constants, and data types in JavaScript...',
+      type: 'text',
       duration: 20,
       order: 2,
       points: 15,
     });
 
     // Create sample modules for Python course
-    const pyModule1 = this.createModule({
+    const pyModule1 = await this.createModule({
       courseId: pythonCourse.id,
-      title: "Python Basics",
-      description: "Introduction to Python programming language",
+      title: 'Python Basics',
+      description: 'Introduction to Python programming language',
       order: 1,
     });
 
     // Create sample lessons for Python modules
-    this.createLesson({
+    await this.createLesson({
       moduleId: pyModule1.id,
-      title: "Getting Started with Python",
-      content: "Python is a versatile programming language...",
-      type: "text",
+      title: 'Getting Started with Python',
+      content: 'Python is a versatile programming language...',
+      type: 'text',
       duration: 25,
       order: 1,
       points: 20,
     });
 
     // Create sample achievements
-    this.createAchievement({
-      title: "First Course Completed",
-      description: "Complete your first course",
-      imageUrl: "course-complete-badge.svg",
-      criteria: { type: "course_completion", count: 1 },
+    await this.createAchievement({
+      title: 'First Course Completed',
+      description: 'Complete your first course',
+      imageUrl: 'course-complete-badge.svg',
+      criteria: { type: 'course_completion', count: 1 },
       points: 50,
     });
 
-    this.createAchievement({
-      title: "5-Day Streak",
-      description: "Log in for 5 consecutive days",
-      imageUrl: "streak-badge.svg",
-      criteria: { type: "login_streak", days: 5 },
+    await this.createAchievement({
+      title: '5-Day Streak',
+      description: 'Log in for 5 consecutive days',
+      imageUrl: 'streak-badge.svg',
+      criteria: { type: 'login_streak', days: 5 },
       points: 25,
     });
 
-    this.createAchievement({
-      title: "Quiz Master",
-      description: "Score 100% on 5 quizzes",
-      imageUrl: "quiz-badge.svg",
-      criteria: { type: "quiz_completion", score: 100, count: 5 },
+    await this.createAchievement({
+      title: 'Quiz Master',
+      description: 'Score 100% on 5 quizzes',
+      imageUrl: 'quiz-badge.svg',
+      criteria: { type: 'quiz_completion', score: 100, count: 5 },
       points: 75,
     });
 
     // Create sample enrollments
-    this.createEnrollment({
-      userId: 3,
+    await this.createEnrollment({
+      userId: student.id,
       courseId: webDevCourse.id,
     });
 
-    this.createEnrollment({
-      userId: 3,
+    await this.createEnrollment({
+      userId: student.id,
       courseId: pythonCourse.id,
     });
 
-    this.createEnrollment({
-      userId: 3,
-      courseId: uxCourse.id,
-    });
-
     // Update enrollment progress
-    const enrollment1 = this.getEnrollment(3, webDevCourse.id);
+    const enrollment1 = await this.getEnrollment(student.id, webDevCourse.id);
     if (enrollment1) {
-      this.updateEnrollment(enrollment1.id, { progress: 68 });
+      await this.updateEnrollment(enrollment1.id, { progress: 68 });
     }
 
-    const enrollment2 = this.getEnrollment(3, pythonCourse.id);
+    const enrollment2 = await this.getEnrollment(student.id, pythonCourse.id);
     if (enrollment2) {
-      this.updateEnrollment(enrollment2.id, { progress: 42 });
-    }
-
-    const enrollment3 = this.getEnrollment(3, uxCourse.id);
-    if (enrollment3) {
-      this.updateEnrollment(enrollment3.id, { progress: 18 });
+      await this.updateEnrollment(enrollment2.id, { progress: 42 });
     }
 
     // Assign achievements to student
-    this.createUserAchievement({
-      userId: 3,
+    await this.createUserAchievement({
+      userId: student.id,
       achievementId: 1,
     });
 
-    this.createUserAchievement({
-      userId: 3,
+    await this.createUserAchievement({
+      userId: student.id,
       achievementId: 2,
     });
 
     // Update student with points
-    this.updateUser(3, { points: 1248, streak: 5 });
+    await this.updateUser(student.id, { points: 1248, streak: 5 });
   }
 
   // User methods
@@ -317,26 +311,26 @@ export class MemStorage implements IStorage {
 
   async getUserByUsername(username: string): Promise<User | undefined> {
     return Array.from(this.users.values()).find(
-      (user) => user.username.toLowerCase() === username.toLowerCase()
+      (user) => user.username.toLowerCase() === username.toLowerCase(),
     );
   }
 
   async getUserByEmail(email: string): Promise<User | undefined> {
-    return Array.from(this.users.values()).find(
-      (user) => user.email.toLowerCase() === email.toLowerCase()
-    );
+    return Array.from(this.users.values()).find((user) => user.email.toLowerCase() === email.toLowerCase());
   }
 
   async createUser(user: InsertUser): Promise<User> {
     const id = this.userCurrentId++;
     const now = new Date();
-    const newUser: User = { 
-      ...user, 
+    const newUser: User = {
+      ...user,
       id,
       points: 0,
       streak: 0,
       lastLogin: now,
-      createdAt: now
+      createdAt: now,
+      role: user.role || UserRole.STUDENT,
+      avatarUrl: null,
     };
     this.users.set(id, newUser);
     return newUser;
@@ -365,19 +359,19 @@ export class MemStorage implements IStorage {
   }
 
   async getCoursesByAuthor(authorId: number): Promise<Course[]> {
-    return Array.from(this.courses.values()).filter(
-      (course) => course.authorId === authorId
-    );
+    return Array.from(this.courses.values()).filter((course) => course.authorId === authorId);
   }
 
   async createCourse(course: InsertCourse): Promise<Course> {
     const id = this.courseCurrentId++;
     const now = new Date();
-    const newCourse: Course = { 
-      ...course, 
-      id, 
+    const newCourse: Course = {
+      ...course,
+      id,
       createdAt: now,
-      updatedAt: now
+      updatedAt: now,
+      points: course.points || 0,
+      imageUrl: course.imageUrl || null,
     };
     this.courses.set(id, newCourse);
     return newCourse;
@@ -409,7 +403,11 @@ export class MemStorage implements IStorage {
 
   async createModule(module: InsertModule): Promise<Module> {
     const id = this.moduleCurrentId++;
-    const newModule: Module = { ...module, id };
+    const newModule: Module = {
+      ...module,
+      id,
+      description: module.description || null,
+    };
     this.modules.set(id, newModule);
     return newModule;
   }
@@ -440,7 +438,13 @@ export class MemStorage implements IStorage {
 
   async createLesson(lesson: InsertLesson): Promise<Lesson> {
     const id = this.lessonCurrentId++;
-    const newLesson: Lesson = { ...lesson, id };
+    const newLesson: Lesson = {
+      ...lesson,
+      id,
+      points: lesson.points || 0,
+      videoUrl: lesson.videoUrl || null,
+      duration: lesson.duration || null,
+    };
     this.lessons.set(id, newLesson);
     return newLesson;
   }
@@ -461,33 +465,29 @@ export class MemStorage implements IStorage {
   // Enrollment methods
   async getEnrollment(userId: number, courseId: number): Promise<Enrollment | undefined> {
     return Array.from(this.enrollments.values()).find(
-      (enrollment) => enrollment.userId === userId && enrollment.courseId === courseId
+      (enrollment) => enrollment.userId === userId && enrollment.courseId === courseId,
     );
   }
 
   async getEnrollmentsByUser(userId: number): Promise<Enrollment[]> {
-    return Array.from(this.enrollments.values()).filter(
-      (enrollment) => enrollment.userId === userId
-    );
+    return Array.from(this.enrollments.values()).filter((enrollment) => enrollment.userId === userId);
   }
 
   async getEnrollmentsByCourse(courseId: number): Promise<Enrollment[]> {
-    return Array.from(this.enrollments.values()).filter(
-      (enrollment) => enrollment.courseId === courseId
-    );
+    return Array.from(this.enrollments.values()).filter((enrollment) => enrollment.courseId === courseId);
   }
 
   async createEnrollment(enrollment: InsertEnrollment): Promise<Enrollment> {
     const id = this.enrollmentCurrentId++;
     const now = new Date();
-    const newEnrollment: Enrollment = { 
-      ...enrollment, 
-      id, 
-      progress: 0, 
-      completed: false, 
+    const newEnrollment: Enrollment = {
+      ...enrollment,
+      id,
+      progress: 0,
+      completed: false,
       certificateIssued: false,
       enrolledAt: now,
-      completedAt: null
+      completedAt: null,
     };
     this.enrollments.set(id, newEnrollment);
     return newEnrollment;
@@ -513,23 +513,21 @@ export class MemStorage implements IStorage {
   // Progress methods
   async getProgressByUserAndLesson(userId: number, lessonId: number): Promise<Progress | undefined> {
     return Array.from(this.progresses.values()).find(
-      (progress) => progress.userId === userId && progress.lessonId === lessonId
+      (progress) => progress.userId === userId && progress.lessonId === lessonId,
     );
   }
 
   async getProgressByUser(userId: number): Promise<Progress[]> {
-    return Array.from(this.progresses.values()).filter(
-      (progress) => progress.userId === userId
-    );
+    return Array.from(this.progresses.values()).filter((progress) => progress.userId === userId);
   }
 
   async createProgress(progressData: InsertProgress): Promise<Progress> {
     const id = this.progressCurrentId++;
-    const newProgress: Progress = { 
-      ...progressData, 
-      id, 
-      completed: false, 
-      completedAt: null 
+    const newProgress: Progress = {
+      ...progressData,
+      id,
+      completed: false,
+      completedAt: null,
     };
     this.progresses.set(id, newProgress);
     return newProgress;
@@ -563,12 +561,20 @@ export class MemStorage implements IStorage {
 
   async createAchievement(achievement: InsertAchievement): Promise<Achievement> {
     const id = this.achievementCurrentId++;
-    const newAchievement: Achievement = { ...achievement, id };
+    const newAchievement: Achievement = {
+      ...achievement,
+      id,
+      points: achievement.points || 0,
+      imageUrl: achievement.imageUrl || null,
+    };
     this.achievements.set(id, newAchievement);
     return newAchievement;
   }
 
-  async updateAchievement(id: number, achievementData: Partial<Achievement>): Promise<Achievement | undefined> {
+  async updateAchievement(
+    id: number,
+    achievementData: Partial<Achievement>,
+  ): Promise<Achievement | undefined> {
     const achievement = this.achievements.get(id);
     if (!achievement) return undefined;
 
@@ -584,23 +590,21 @@ export class MemStorage implements IStorage {
   // User Achievement methods
   async getUserAchievement(userId: number, achievementId: number): Promise<UserAchievement | undefined> {
     return Array.from(this.userAchievements.values()).find(
-      (ua) => ua.userId === userId && ua.achievementId === achievementId
+      (ua) => ua.userId === userId && ua.achievementId === achievementId,
     );
   }
 
   async getUserAchievementsByUser(userId: number): Promise<UserAchievement[]> {
-    return Array.from(this.userAchievements.values()).filter(
-      (ua) => ua.userId === userId
-    );
+    return Array.from(this.userAchievements.values()).filter((ua) => ua.userId === userId);
   }
 
   async createUserAchievement(userAchievement: InsertUserAchievement): Promise<UserAchievement> {
     const id = this.userAchievementCurrentId++;
     const now = new Date();
-    const newUserAchievement: UserAchievement = { 
-      ...userAchievement, 
-      id, 
-      unlockedAt: now 
+    const newUserAchievement: UserAchievement = {
+      ...userAchievement,
+      id,
+      unlockedAt: now,
     };
     this.userAchievements.set(id, newUserAchievement);
     return newUserAchievement;
@@ -613,23 +617,22 @@ export class MemStorage implements IStorage {
   // Certificate methods
   async getCertificate(userId: number, courseId: number): Promise<Certificate | undefined> {
     return Array.from(this.certificates.values()).find(
-      (cert) => cert.userId === userId && cert.courseId === courseId
+      (cert) => cert.userId === userId && cert.courseId === courseId,
     );
   }
 
   async getCertificatesByUser(userId: number): Promise<Certificate[]> {
-    return Array.from(this.certificates.values()).filter(
-      (cert) => cert.userId === userId
-    );
+    return Array.from(this.certificates.values()).filter((cert) => cert.userId === userId);
   }
 
   async createCertificate(certificate: InsertCertificate): Promise<Certificate> {
     const id = this.certificateCurrentId++;
     const now = new Date();
-    const newCertificate: Certificate = { 
-      ...certificate, 
-      id, 
-      issuedAt: now 
+    const newCertificate: Certificate = {
+      ...certificate,
+      id,
+      issuedAt: now,
+      certificateUrl: certificate.certificateUrl || null,
     };
     this.certificates.set(id, newCertificate);
     return newCertificate;
