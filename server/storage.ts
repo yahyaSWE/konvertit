@@ -137,174 +137,171 @@ export class MemStorage implements IStorage {
     this.certificateCurrentId = 1;
 
     // Initialize with some data
-    this.initializeData().catch(console.error);
+    this.initializeData();
   }
 
   private async initializeData() {
-    try {
-      // Create sample users
-      const admin = await this.createUser({
-        username: 'admin',
-        password: 'admin123',
-        email: 'admin@example.com',
-        fullName: 'Admin User',
-        role: UserRole.ADMIN,
-      });
+    // Create sample users
+    const admin = await this.createUser({
+      username: 'admin',
+      password: 'admin123',
+      email: 'admin@example.com',
+      fullName: 'Admin User',
+      role: UserRole.ADMIN,
+    });
 
-      const teacher = await this.createUser({
-        username: 'teacher',
-        password: 'teacher123',
-        email: 'teacher@example.com',
-        fullName: 'Teacher User',
-        role: UserRole.TEACHER,
-      });
+    const teacher = await this.createUser({
+      username: 'teacher',
+      password: 'teacher123',
+      email: 'teacher@example.com',
+      fullName: 'Teacher User',
+      role: UserRole.TEACHER,
+    });
 
-      const student = await this.createUser({
-        username: 'student',
-        password: 'student123',
-        email: 'student@example.com',
-        fullName: 'Student User',
-        role: UserRole.STUDENT,
-      });
+    const student = await this.createUser({
+      username: 'student',
+      password: 'student123',
+      email: 'student@example.com',
+      fullName: 'Student User',
+      role: UserRole.STUDENT,
+    });
 
-      // Create sample courses
-      const webDevCourse = await this.createCourse({
-        title: 'Web Development Fundamentals',
-        description: 'Learn the basics of web development',
-        category: 'Programming',
-        level: 'Beginner',
-        duration: 8,
-        authorId: teacher.id,
-        points: 500,
-      });
+    // Create sample courses
+    const webDevCourse = await this.createCourse({
+      title: 'Web Development Fundamentals',
+      description: 'Learn the basics of web development',
+      category: 'Programming',
+      level: 'Beginner',
+      duration: 8,
+      authorId: teacher.id,
+      points: 500,
+    });
 
-      const pythonCourse = await this.createCourse({
-        title: 'Python Programming',
-        description: 'Master Python programming language',
-        category: 'Programming',
-        level: 'Beginner',
-        duration: 6,
-        authorId: teacher.id,
-        points: 300,
-      });
+    const pythonCourse = await this.createCourse({
+      title: 'Python Programming',
+      description: 'Master Python programming language',
+      category: 'Programming',
+      level: 'Beginner',
+      duration: 6,
+      authorId: teacher.id,
+      points: 300,
+    });
 
-      // Create sample modules for JavaScript course
-      const jsModule1 = await this.createModule({
-        courseId: webDevCourse.id,
-        title: 'JavaScript Basics',
-        description: 'Learn the fundamentals of JavaScript programming',
-        order: 1,
-      });
+    // Create sample modules for JavaScript course
+    const jsModule1 = await this.createModule({
+      courseId: webDevCourse.id,
+      title: 'JavaScript Basics',
+      description: 'Learn the fundamentals of JavaScript programming',
+      order: 1,
+    });
 
-      const jsModule2 = await this.createModule({
-        courseId: webDevCourse.id,
-        title: 'Working with DOM',
-        description: 'Manipulate HTML elements using JavaScript',
-        order: 2,
-      });
+    const jsModule2 = await this.createModule({
+      courseId: webDevCourse.id,
+      title: 'Working with DOM',
+      description: 'Manipulate HTML elements using JavaScript',
+      order: 2,
+    });
 
-      // Create sample lessons for JavaScript modules
-      await this.createLesson({
-        moduleId: jsModule1.id,
-        title: 'Introduction to JavaScript',
-        content: 'JavaScript is a programming language that runs in the browser...',
-        type: 'text',
-        duration: 15,
-        order: 1,
-        points: 10,
-      });
+    // Create sample lessons for JavaScript modules
+    await this.createLesson({
+      moduleId: jsModule1.id,
+      title: 'Introduction to JavaScript',
+      content: 'JavaScript is a programming language that runs in the browser...',
+      type: 'text',
+      duration: 15,
+      order: 1,
+      points: 10,
+    });
 
-      await this.createLesson({
-        moduleId: jsModule1.id,
-        title: 'Variables and Data Types',
-        content: 'Learn about variables, constants, and data types in JavaScript...',
-        type: 'text',
-        duration: 20,
-        order: 2,
-        points: 15,
-      });
+    await this.createLesson({
+      moduleId: jsModule1.id,
+      title: 'Variables and Data Types',
+      content: 'Learn about variables, constants, and data types in JavaScript...',
+      type: 'text',
+      duration: 20,
+      order: 2,
+      points: 15,
+    });
 
-      // Create sample modules for Python course
-      const pyModule1 = await this.createModule({
-        courseId: pythonCourse.id,
-        title: 'Python Basics',
-        description: 'Introduction to Python programming language',
-        order: 1,
-      });
+    // Create sample modules for Python course
+    const pyModule1 = await this.createModule({
+      courseId: pythonCourse.id,
+      title: 'Python Basics',
+      description: 'Introduction to Python programming language',
+      order: 1,
+    });
 
-      // Create sample lessons for Python modules
-      await this.createLesson({
-        moduleId: pyModule1.id,
-        title: 'Getting Started with Python',
-        content: 'Python is a versatile programming language...',
-        type: 'text',
-        duration: 25,
-        order: 1,
-        points: 20,
-      });
+    // Create sample lessons for Python modules
+    await this.createLesson({
+      moduleId: pyModule1.id,
+      title: 'Getting Started with Python',
+      content: 'Python is a versatile programming language...',
+      type: 'text',
+      duration: 25,
+      order: 1,
+      points: 20,
+    });
 
-      // Create sample achievements
-      const achievement1 = await this.createAchievement({
-        title: 'First Course Completed',
-        description: 'Complete your first course',
-        imageUrl: 'course-complete-badge.svg',
-        criteria: { type: 'course_completion', count: 1 },
-        points: 50,
-      });
+    // Create sample achievements
+    await this.createAchievement({
+      title: 'First Course Completed',
+      description: 'Complete your first course',
+      imageUrl: 'course-complete-badge.svg',
+      criteria: { type: 'course_completion', count: 1 },
+      points: 50,
+    });
 
-      const achievement2 = await this.createAchievement({
-        title: '5-Day Streak',
-        description: 'Log in for 5 consecutive days',
-        imageUrl: 'streak-badge.svg',
-        criteria: { type: 'login_streak', days: 5 },
-        points: 25,
-      });
+    await this.createAchievement({
+      title: '5-Day Streak',
+      description: 'Log in for 5 consecutive days',
+      imageUrl: 'streak-badge.svg',
+      criteria: { type: 'login_streak', days: 5 },
+      points: 25,
+    });
 
-      await this.createAchievement({
-        title: 'Quiz Master',
-        description: 'Score 100% on 5 quizzes',
-        imageUrl: 'quiz-badge.svg',
-        criteria: { type: 'quiz_completion', score: 100, count: 5 },
-        points: 75,
-      });
+    await this.createAchievement({
+      title: 'Quiz Master',
+      description: 'Score 100% on 5 quizzes',
+      imageUrl: 'quiz-badge.svg',
+      criteria: { type: 'quiz_completion', score: 100, count: 5 },
+      points: 75,
+    });
 
-      // Create sample enrollments
-      const enrollment1 = await this.createEnrollment({
-        userId: student.id,
-        courseId: webDevCourse.id,
-      });
+    // Create sample enrollments
+    await this.createEnrollment({
+      userId: student.id,
+      courseId: webDevCourse.id,
+    });
 
-      const enrollment2 = await this.createEnrollment({
-        userId: student.id,
-        courseId: pythonCourse.id,
-      });
+    await this.createEnrollment({
+      userId: student.id,
+      courseId: pythonCourse.id,
+    });
 
-      // Update enrollment progress
-      if (enrollment1) {
-        await this.updateEnrollment(enrollment1.id, { progress: 68 });
-      }
-
-      if (enrollment2) {
-        await this.updateEnrollment(enrollment2.id, { progress: 42 });
-      }
-
-      // Assign achievements to student
-      await this.createUserAchievement({
-        userId: student.id,
-        achievementId: achievement1.id,
-      });
-
-      await this.createUserAchievement({
-        userId: student.id,
-        achievementId: achievement2.id,
-      });
-
-      // Update student with points
-      await this.updateUser(student.id, { points: 1248, streak: 5 });
-    } catch (error) {
-      console.error('Error initializing data:', error);
-      throw error;
+    // Update enrollment progress
+    const enrollment1 = await this.getEnrollment(student.id, webDevCourse.id);
+    if (enrollment1) {
+      await this.updateEnrollment(enrollment1.id, { progress: 68 });
     }
+
+    const enrollment2 = await this.getEnrollment(student.id, pythonCourse.id);
+    if (enrollment2) {
+      await this.updateEnrollment(enrollment2.id, { progress: 42 });
+    }
+
+    // Assign achievements to student
+    await this.createUserAchievement({
+      userId: student.id,
+      achievementId: 1,
+    });
+
+    await this.createUserAchievement({
+      userId: student.id,
+      achievementId: 2,
+    });
+
+    // Update student with points
+    await this.updateUser(student.id, { points: 1248, streak: 5 });
   }
 
   // User methods
