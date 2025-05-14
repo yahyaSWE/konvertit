@@ -13,8 +13,8 @@ export default defineConfig({
       registerType: 'autoUpdate',
       includeAssets: ['favicon.ico', 'apple-touch-icon.png', 'mask-icon.svg'],
       manifest: {
-        name: 'Konvertit Appen',
-        short_name: 'Konvertit Appen',
+        name: 'Konvertit Guiden',
+        short_name: 'Konvertit Guiden',
         theme_color: '#ffffff',
         icons: [
           {
