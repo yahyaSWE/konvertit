@@ -69,5 +69,9 @@ export default defineConfig({
   },
   server: {
     port: 5000,
+    allowedHosts: ['konvertit-johanblomdahl90.replit.app'],
+  },
+  preview: {
+    allowedHosts: ['konvertit-johanblomdahl90.replit.app'],
   },
 });
